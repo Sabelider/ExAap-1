@@ -4819,13 +4819,6 @@ async def ajustar_professores_foto():
     return {"status": "ok", "atualizados": count}
 
 
-
-
-@app.get("/paginavendas", response_class=HTMLResponse)
-async def paginavendas(request: Request):
-    return templates.TemplateResponse("paginavendas.html", {"request": request})
-
-
 @app.get("/sucesso", response_class=HTMLResponse)
 async def pagina_sucesso(request: Request, mensagem: str = "Operação concluída com sucesso!"):
     return templates.TemplateResponse("sucesso.html", {
@@ -5135,3 +5128,15 @@ async def remover_aluno(payload: dict = Body(...)):
         "success": True,
         "message": "Aluno removido com sucesso"
     }
+
+@app.get("/paginavendas", response_class=HTMLResponse)
+async def paginavendas(request: Request):
+    dados = {
+        "titulo": "Página de Vendas",
+        "mensagem": "Bem-vindo à área de vendas"
+    }
+    return templates.TemplateResponse("paginavendas.html", {
+        "request": request,
+        **dados
+    })
+
